@@ -4,8 +4,6 @@
 This library provides a solution for managing concurrent tasks in a Node.js environment. It leverages a combination of worker threads organized into a pool and a task queue system to efficiently execute tasks, ensuring optimal utilization of system resources and enhancing application performance.
 
 ## Table of Contents
-- [worker-pool-task-queue](#worker-pool-task-queue)
-  - [Table of Contents](#table-of-contents)
   - [About](#about)
   - [Installation and usage](#installation-and-usage)
   - [Support](#support)
