@@ -11,8 +11,10 @@
     "url": "git+https://github.com/beeplaced/worker-pool-task-queue.git"
   },
   "keywords": [
-    "[node",
-    "worker_treads]"
+    "node.js",
+    "worker_treads",
+    "workerpool",
+    "taskqueue"
   ],
   "author": "beeplaced",
   "license": "MIT",
