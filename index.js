@@ -10,7 +10,6 @@ class WorkerPool {
     constructor(poolSize, workerFilePath, maxWorkers, returnWorker=false) {
         
         /** @type {boolean} */ this.returnWorker = returnWorker
-        /** @type {boolean} */ this.returnExecTime = returnExecTime
 
         /** The pool of worker threads. 
          * @type {Array<WorkerObject>} */ this.pool = [];
