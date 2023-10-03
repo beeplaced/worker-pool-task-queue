@@ -122,7 +122,7 @@ class WorkerPool {
             const { worker, id } = await this.getWorker();
             if (!worker) {
                 await this.addTaskQueue(task);
-                return { status: 202 };;
+                return { status: 202 };
             }
             try {
                 const requestInput = { init: true, fn };
