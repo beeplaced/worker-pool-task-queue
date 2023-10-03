@@ -7,8 +7,11 @@ class WorkerPool {
 * @param {string} workerFilePath - The file path of the worker script.
 * @param {number} maxWorkers - The maximum number of workers allowed in the pool.
 */
-    constructor(poolSize, workerFilePath, maxWorkers) {
+    constructor(poolSize, workerFilePath, maxWorkers, returnWorker=false) {
         
+        /** @type {boolean} */ this.returnWorker = returnWorker
+        /** @type {boolean} */ this.returnExecTime = returnExecTime
+
         /** The pool of worker threads. 
          * @type {Array<WorkerObject>} */ this.pool = [];
 
@@ -127,7 +130,9 @@ class WorkerPool {
             try {
                 const requestInput = { init: true, fn };
                 const result = await this.executeWorkerTask(worker, requestInput);
-                return { status: 200, result, worker: id };
+                const ret = { status: 200, result };
+                if (this.returnWorker) ret.worker = id
+                return { status: 200, result };
             } catch (/** @type {*} */ err) {
                 return { status: 300, err };
             } finally {
