@@ -56,12 +56,12 @@ class WorkerPool {
             }
     };
 
-    executeWorkerTask = async (worker, requestInput) => {
+    executeWorkerTask = async (worker, task) => {
         return new Promise((resolve) => { // Use once to handle the response from the worker
             worker.once('message', (data) => {
                 resolve(data)
             })
-            worker.postMessage(requestInput)
+            worker.postMessage(task)
         })
     }
 
@@ -119,7 +119,6 @@ class WorkerPool {
 * @async * @param {WorkerTask} task - The task to be executed in a worker thread.
 * @returns {Promise<{ status: number, result?: any, worker?: string, err?: Error }>} - A promise representing the status and result of the task execution.
 */ runTask = async (task) => {
-        const { fn } = task;
         try {
             const { worker, id } = await this.getWorker();
             if (!worker) {
@@ -127,8 +126,7 @@ class WorkerPool {
                 return { status: 202 };
             }
             try {
-                const requestInput = { init: true, fn };
-                const result = await this.executeWorkerTask(worker, requestInput);
+                const result = await this.executeWorkerTask(worker, task);
                 const ret = { status: 200, result };
                 if (this.returnWorker) ret.worker = id
                 return ret;

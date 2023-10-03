@@ -1,11 +1,9 @@
-
-# BETA - worker-pool-task-queue
+# worker-pool-task-queue
 
 This library provides a solution for managing concurrent tasks in a Node.js environment. It leverages a combination of worker threads organized into a pool and a task queue system to efficiently execute tasks, ensuring optimal utilization of system resources and enhancing application performance.
 
 ## Table of Contents
-- [BETA - worker-pool-task-queue](#beta---worker-pool-task-queue)
-  - [Table of Contents](#table-of-contents)
+<!-- no toc -->
   - [About](#about)
   - [Installation and usage](#installation-and-usage)
   - [Support](#support)
@@ -74,7 +72,7 @@ Create functions to execute tasks using the worker pool. For example, you can de
 ```js
 async function executeTask() {
     try {
-        const result = await pool.runTask({ fn: 'myfunc' });
+        const result = await pool.runTask({ fn: 'myfunc', params: { set: true } });
         console.log(result);
     } catch (error) {
         console.error(error);
