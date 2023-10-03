@@ -131,7 +131,7 @@ class WorkerPool {
                 const result = await this.executeWorkerTask(worker, requestInput);
                 const ret = { status: 200, result };
                 if (this.returnWorker) ret.worker = id
-                return { status: 200, result };
+                return ret;
             } catch (/** @type {*} */ err) {
                 return { status: 300, err };
             } finally {
