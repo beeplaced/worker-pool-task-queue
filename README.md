@@ -11,7 +11,7 @@ This library provides a solution for managing concurrent tasks in a Node.js envi
 
 ## About
 
-The library is specifically designed for Node.js environments and is based upon the native worker_threads module.
+The library is specifically designed for Node.js environments and is based upon the native worker_threads module (https://nodejs.org/api/worker_threads.html).
 
 * Worker Pool Management:
 

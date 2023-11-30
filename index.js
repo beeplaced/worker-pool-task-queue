@@ -20,7 +20,7 @@ class WorkerPool {
         /** The maximum number of workers allowed in the pool.
          * @type {number} */ this.maxWorkers = maxWorkers;
 
-        for (let i = 0; i < poolSize; i++) {        // Initialize worker pool
+        for (let i = 0; i < poolSize; i++) {     // Initialize worker pool
             const worker = new Worker(workerFilePath, { workerData });
             const workerId = `Worker-${i + 1}`;
 
@@ -33,7 +33,6 @@ class WorkerPool {
             worker.on('error', handleError);
             this.pool.push({ id: workerId, worker });
         }
-
         /** The queue of tasks awaiting execution.
          * @type {Array<WorkerTask>} */ this.taskQueue = [];
     }
@@ -42,7 +41,8 @@ class WorkerPool {
             if (this.pool.length < this.maxWorkers) {
                 try {
                 const newWorker = new Worker(this.workerFilePath, { workerData });
-                const workerId = `increased worker-${this.pool.length + 1}`;
+                const workerID = this.pool.length + 1
+                const workerId = `${workerID > this.maxWorkers ? 'increased' : 'added'} worker-${this.pool.length + 1}`;
                     newWorker.on('error', (/** @type {*} */ error) => {
                     throw new CustomError(error, 300)
                 });
@@ -72,6 +72,7 @@ class WorkerPool {
             if (this.pool.length === 0) {
                 await this.increaseWorkerPool();
             }
+           // console.log(this.pool.shift())
             const workerItem = this.pool.pop();
             if (!workerItem) {
                 return { worker: false };
@@ -108,6 +109,7 @@ class WorkerPool {
         // Check if there are tasks in the queue and available workers in the pool
         if (this.taskQueue.length > 0 && this.pool.length > 0) {
             // Get the next task from the queue
+
             const task /** @type {WorkerTask} */ = this.taskQueue.shift();
             if (task) await this.runTask(task);// Execute the task in an available worker thread
             // Continue processing queued tasks recursively
@@ -127,9 +129,8 @@ class WorkerPool {
             }
             try {
                 const result = await this.executeWorkerTask(worker, task);
-                const ret = { status: 200, result };
-                if (this.returnWorker) ret.worker = id
-                return ret;
+                if (this.returnWorker) result.worker = id
+                return result;
             } catch (/** @type {*} */ err) {
                 return { status: 300, err };
             } finally {

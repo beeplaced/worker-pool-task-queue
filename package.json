@@ -1,6 +1,6 @@
 {
   "name": "worker-pool-task-queue",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "The library is specifically designed for Node.js environments and is based upon the native worker_threads module",
   "main": "index.js",
   "scripts": {
