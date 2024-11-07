@@ -41,8 +41,10 @@ class WorkerPool {
             if (this.pool.length < this.maxWorkers) {
                 try {
                 const newWorker = new Worker(this.workerFilePath, { workerData });
-                const workerID = this.pool.length + 1
-                const workerId = `${workerID > this.maxWorkers ? 'increased' : 'added'} worker-${this.pool.length + 1}`;
+                //changed 2024-11-07
+                //const workerID = this.pool.length + 1
+                //const workerId = `${workerID > this.maxWorkers ? 'increased' : 'added'} worker-${this.pool.length + 1}`;
+                const workerId = `worker-${this.pool.length + 1}`;
                     newWorker.on('error', (/** @type {*} */ error) => {
                     throw new CustomError(error, 300)
                 });

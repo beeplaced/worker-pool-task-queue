@@ -7,6 +7,7 @@ This library provides a solution for managing concurrent tasks in a Node.js envi
   - [About](#about)
   - [Installation and usage](#installation-and-usage)
   - [Support](#support)
+  - [Changelog](#changelog)
 
 
 ## About
@@ -94,3 +95,7 @@ executeTasksMultipleTimes();
 ## Support
 
 This library used jsdoc types and is tested in Chrome
+
+## Changelog
+
+- 2024-11-07 - increaseWorkerPool naming Convention (v1.0.6)
